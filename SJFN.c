@@ -1,4 +1,46 @@
+#include<stdio.h>
+
+int main() {
+    int time, burst_time[10], at[10], sum_burst_time = 0, smallest, n, i;
+    int sumt = 0, sumw = 0;
+    
+    printf("Enter the number of processes: ");
+    scanf("%d", &n);
+    
+    for (i = 0; i < n; i++) {
+        printf("Enter the arrival time for process P%d: ", i + 1);
+
+        scanf("%d", &at[i]);
+        printf("Enter the burst time for process P%d: ", i + 1);
+        scanf("%d", &burst_time[i]);
+        sum_burst_time += burst_time[i];
+    }
+    
+    burst_time[9] = 9999;
+    
+    for (time = 0; time < sum_burst_time;) {
+        smallest = 9;
+        for (i = 0; i < n; i++) {
+            if (at[i] <= time && burst_time[i] > 0 && burst_time[i] < burst_time[smallest]) {
+                smallest = i;
+            }
+        }
+        
+        printf("P[%d]\t|\t%d\t|\t%d\n", smallest + 1, time + burst_time[smallest] - at[smallest], time - at[smallest]);
+        
+        sumt += time + burst_time[smallest] - at[smallest];
+        sumw += time - at[smallest];
+        time += burst_time[smallest];
+        burst_time[smallest] = 0;
+    }
+    
+    printf("\nAverage waiting time = %f", sumw * 1.0 / n);
+    printf("\nAverage turnaround time = %f", sumt * 1.0 / n);
+    
+    return 0;
+}
 /*
+
 Enter the number of processes: 4
 Enter the arrival time for process P1: 2
 Enter the burst time for process P1: 1
@@ -14,4 +56,6 @@ P[3]    |       4       |       3
 P[2]    |       12      |       7
 
 Average waiting time = 3.500000
-Average turnaround time = 6.750000[1] + Done  */
+Average turnaround time = 6.750000[1] + Done  
+
+*/
