@@ -26,7 +26,7 @@ void main()
     // Display the process No, burst time, Turn Around Time, and the waiting time
     printf("\nProcess No\tBurst Time\tTAT\tWaiting Time\n");
 
-    for (sum = 0, i = 0; y != 0;)
+    for (sum = 0; i = 0; y != 0;)
     {
         if (temp[i] <= quant && temp[i] > 0) // Check the conditions
         {
