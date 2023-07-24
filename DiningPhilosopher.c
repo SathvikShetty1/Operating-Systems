@@ -29,7 +29,7 @@ int main() {
 
     pthread_t philosopher[NUM_PHILOSOPHERS];
     for (i = 0; i < NUM_PHILOSOPHERS; i++) {
-        status_message = pthread_create(&philosopher[i], NULL, (void*)dine, (void*)(intptr_t)i); // Cast i to void pointer
+        status_message = pthread_create(&philosopher[i], NULL, (void*)dine, (void*)(intptr_t)i);
         if (status_message != 0) {
             printf("\n Thread creation error \n");
             exit(1);
@@ -65,21 +65,3 @@ void dine(int n) {
     pthread_mutex_unlock(&chopstick[(n + 1) % NUM_CHOPSTICKS]);
     printf("\n Philosopher %d Finished eating", n);
 }
-/*
-
-
- Philosopher 0 is thinking
- Philosopher 0 is eating
- Philosopher 1 is thinking
- Philosopher 4 is thinking
- Philosopher 3 is thinking
- Philosopher 2 is thinking
- Philosopher 0 Finished eating
- Philosopher 4 is eating
- Philosopher 4 Finished eating
- Philosopher 3 is eating
- Philosopher 3 Finished eating
- Philosopher 2 is eating
- Philosopher 2 Finished eating
- Philosopher 1 is eating
- Philosopher 1 Finished eating*/
