@@ -1,66 +1,101 @@
-#include <stdio.h>
-#include <conio.h>
-
-void main() {
-    int k = 0, a = 0, b = 0, instance[5], availability[5], allocated[10][5], need[10][5], MAX[10][5], process, P[10], no_of_resources, cnt = 0, i, j;
-    printf("\n Enter the number of resources: ");
-    scanf("%d", &no_of_resources);
-
-    printf("\n Enter the max number of instances for each resource:\n");
-    for (i = 0; i < no_of_resources; i++) {
-        availability[i] = 0;
-        printf("%c=", (i + 97));
-        scanf("%d", &instance[i]);
+#include<stdio.h>
+// #include<conio.h>
+void main(){
+    int k=0,output[10],d=0,t=0,ins[5],i,avail[5],allocated[10][5],need[10][5],max[10][5],pno,j,rz,P[10],count=0;
+    printf("\n Enter the number of resources : ");
+    scanf("%d",&rz);
+    printf("\n enter the max instances of each resources\n");
+    for(i=0;i<rz;i++)
+    {
+        avail[i]=0;
+        printf("%c= ",(i+97));
+        scanf("%d",&ins[i]);
     }
-    printf("\n Enter the number of processes:");
-    scanf("%d", &process);
-    printf("\n Enter the allocation matrix\n");
-    for (i = 0; i < no_of_resources; i++)
-        printf("%c", (i + 97));
+    printf("\n Enter the number of processes : ");
+    scanf("%d",&pno);
+    printf("\n Enter the allocation matrix \n     ");
+    for(i=0;i<rz;i++)
+        printf(" %c",(i+97));
     printf("\n");
-    for (i = 0; i < process; i++) {
-        P[i] = i;
-        printf("P[%d]", P[i]);
-        for (j = 0; j < no_of_resources; j++) {
-            scanf("%d", &allocated[i][j]);
-            availability[j] += allocated[i][j];
+    for(i=0;i <pno;i++)
+    {
+        P[i]=i;
+        printf("P[%d]  ",P[i]);
+        for(j=0;j<rz;j++)
+        {
+            scanf("%d",&allocated[i][j]);
+            avail[j]+=allocated[i][j];
         }
     }
-
-    printf("\nEnter the Max Matrix\n");
-    for (i = 0; i < no_of_resources; i++) {
-        printf("%c", (i + 97));
-        availability[i] = instance[i] - availability[i];
+    printf("\nEnter the max matrix \n     ");
+    for(i=0;i<rz;i++)
+    {
+        printf(" %c",(i+97));
+        avail[i]=ins[i]-avail[i];
     }
     printf("\n");
-    for (i = 0; i < process; i++) {
-        printf("P[%d]", i);
-        for (j = 0; j < no_of_resources; j++) {
-            scanf("%d", &MAX[i][j]);
-        }
-        printf("\n");
+    for(i=0;i <pno;i++)
+    {
+        printf("P[%d]  ",i);
+        for(j=0;j<rz;j++)
+            scanf("%d",&max[i][j]);
     }
-A:
-    a = -1;
-    for (i = 0; i < process; i++) {
-        cnt = 0;
-        b = P[i];
-        for (j = 0; j < no_of_resources; j++) {
-            need[b][j] = MAX[b][j] - allocated[b][j];
-            if (need[b][j] <= availability[j])
-                cnt++;
+    printf("\n");
+    A: d=-1;
+    for(i=0;i <pno;i++)
+    {
+        count=0;
+        t=P[i];
+        for(j=0;j<rz;j++)
+        {
+            need[t][j] = max[t][j]-allocated[t][j];
+            if(need[t][j]<=avail[j])
+                count++;
         }
-        if (cnt == no_of_resources) {
-            printf("P[%d] ", b);
-            for (j = 0; j < no_of_resources; j++) {
-                availability[j] += allocated[b][j];
-            }
-        } else
-            P[++a] = P[i];
+        if(count==rz)
+        {
+            output[k++]=P[i];
+            for(j=0;j<rz;j++)
+                avail[j]+=allocated[t][j];
+        }
+        else
+            P[++d]=P[i];
     }
-    if (a != -1) {
-        process = a + 1;
+    if(d!=-1)
+    {
+        pno=d+1;
         goto A;
     }
-    getch();
+    printf("\t <");
+    for(i=0;i<k;i++)
+        printf(" P[%d] ",output[i]);
+    printf(">");
+    // getch();
 }
+
+/* Enter the number of resources : 3
+
+ enter the max instances of each resources
+a= 10
+b= 5
+c= 7
+
+ Enter the number of processes : 5
+
+ Enter the allocation matrix 
+      a b c
+P[0]  0 1 0
+P[1]  2 0 0
+P[2]  3 0 2
+P[3]  2 1 1
+P[4]  0 0 2
+
+Enter the max matrix 
+      a b c
+P[0]  7 5 3
+P[1]  3 2 2
+P[2]  9 0 2
+P[3]  2 2 2
+P[4]  4 3 3
+
+         < P[1]  P[3]  P[4]  P[0]  P[2] >*/
