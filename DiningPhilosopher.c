@@ -65,3 +65,20 @@ void dine(int n) {
     pthread_mutex_unlock(&chopstick[(n + 1) % NUM_CHOPSTICKS]);
     printf("\n Philosopher %d Finished eating", n);
 }
+/*
+
+ Philosopher 0 is thinking
+ Philosopher 1 is thinking
+ Philosopher 1 is eating
+ Philosopher 3 is thinking
+ Philosopher 3 is eating
+ Philosopher 2 is thinking
+ Philosopher 4 is thinking
+ Philosopher 3 Finished eating
+ Philosopher 1 Finished eating
+ Philosopher 0 is eating
+ Philosopher 2 is eating
+ Philosopher 2 Finished eating
+ Philosopher 0 Finished eating
+ Philosopher 4 is eating
+ Philosopher 4 Finished eating*/
