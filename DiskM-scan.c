@@ -68,21 +68,23 @@ return 0;
 /*
 
 Enter the no of requests:
-5
+7
 Enter the request sequence
-1
-2
-3
-4
-5
+82
+170
+43
+140
+24
+16
+190
 Enter the initial head position
-3
+50
 Enter the total disk size
-5
+200
 Enter the head movement direction for high 1 and for low 0
 1
 Sequence of request access:
-453 2 1 
-Total head movement is 6
+82 140 170 190 43 24 16 
+Total head movement is 332
   */
     
